@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Php file Write -detailed</title>
+</head>
+<style>
+    html {
+        padding: 0;
+        margin: 0;
+    }
+
+    body {
+        text-align: center;
+        font-size: 23px;
+    }
+
+    h1 {
+        text-align: center;
+        font-size: 50px;
+        color: blue;
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 35px;
+        color: red;
+    }
+
+    button,
+    a {
+        padding: 15px 23px;
+        border: none;
+        border-radius: 10px;
+        background: green;
+        font-size: 15px;
+        color: white;
+        cursor: pointer;
+        box-shadow: 5px 5px 10px 0px black;
+        transition: all linear 250ms;
+        text-decoration: none;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    button:hover,
+    a:hover {
+        filter: brightness(1.2);
+    }
+
+    button:active,
+    a:active {
+        filter: saturate(0);
+    }
+
+    div.input-holder form {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    div.input-holder.hide {
+        display: none;
+    }
+
+    div.input-holder form input {
+        margin: 10px 0px;
+        width: 60%;
+        height: 55px;
+        outline: none;
+        border: none;
+        box-shadow: 5px 5px 10px 2px #1f1f1f1f;
+        font-size: 25px;
+        font-weight: 600;
+        padding: 5px 15px;
+        color: blue;
+    }
+</style>
+
+<body bgcolor="whitesmoke">
+    <section id="homepage" class='homepage'>
+        <h1>
+            <?php
+                    $greet = fopen('username.txt','r') or die('Unable to open');
+                    echo fread($greet,filesize('username.txt'));
+                    fclose($greet);
+                ?>
+        </h1>
+        <h1>FILE WRITE AND READ</h1>
+
+
+
+
+
+        
+
+        <h2>File Read Method</h2>
+        <p>In index.php file we wrote a php code <br>
+            ~<br>
+            $thispage = fopen('filename.txt','r+') or die('ERROR: File Not Found');<br>
+
+            echo fread($thispage,filesize('filename.txt'));<br>
+            fclose($thispage);<br>
+            ~</p>
+
+
+
+
+
+    </section>
+
+    <section>
+        <h2>
+            Save Some thing by PHP
+        </h2>
+
+        <p>
+            After clicking the Start Test button there will be an input option. Then place a name there and click
+            save.there will be an greetings heading added And reload the file or do any thing this name will be saved
+            here.
+
+        </p>
+        <button onclick="startTest()">START TEST</button>
+        <div id="holderDiv" class="input-holder hide">
+            <form action="" method="get">
+                <label for="fullname">Enter your full name:</label>
+
+                <input name="fullname" id="fullname" type="text" placeholder="Type your name">
+
+                <button type="submit">Save</button>
+            </form>
+
+
+        </div>
+
+    </section>
+    <?php
+       if(isset($_GET['fullname']) == true){
+        $fullname = $_GET['fullname'];
+        $withGreetings = fopen('username.txt','w') or die('CANNOT CREATE FILE');
+        $text = 'Welcome ' . $fullname . " !!!";
+
+        fwrite($withGreetings,$text);
+        fclose($withGreetings);
+        header('Location: ../file handling/');
+       }
+    ?>
+</body>
+
+
+<script>
+    function startTest() {
+        document.querySelector('.input-holder').classList.remove('hide');
+    }
+</script>
+
+</html>
